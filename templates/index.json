@@ -4,9 +4,9 @@
     "name": "Receita no iPhone (v1)",
     "description": "Tela de bloqueio com duas notificações da Receita.",
     "assets": {
-      "background": "/templates/receita/fundo.jpg",
-      "appIcon": "/templates/receita/app.png",
-      "preview": "/templates/receita/preview.jpg"
+      "background": "templates/receita/fundo.jpg",
+      "appIcon": "templates/receita/app.png",
+      "preview": "templates/receita/preview.jpg"
     },
     "fields": [
       {

@@ -26,12 +26,24 @@ function normalizeAssetPublicPath(slug, assetPath) {
     throw new Error('asset invalido. Esperado caminho nao vazio.');
   }
 
-  if (assetPath.startsWith('http://') || assetPath.startsWith('https://') || assetPath.startsWith('/')) {
+  if (assetPath.startsWith('http://') || assetPath.startsWith('https://')) {
+    return assetPath;
+  }
+
+  if (assetPath.startsWith('/templates/')) {
+    return assetPath.slice(1);
+  }
+
+  if (assetPath.startsWith('templates/')) {
+    return assetPath;
+  }
+
+  if (assetPath.startsWith('/')) {
     return assetPath;
   }
 
   const cleaned = assetPath.replace(/^\.\//, '');
-  return `/templates/${slug}/${cleaned}`;
+  return `templates/${slug}/${cleaned}`;
 }
 
 async function assertAssetExists(slug, assetPath) {
@@ -43,6 +55,9 @@ async function assertAssetExists(slug, assetPath) {
 
   if (assetPath.startsWith('/templates/')) {
     const relative = assetPath.replace(/^\/templates\//, '');
+    targetFile = path.join(templatesDir, relative);
+  } else if (assetPath.startsWith('templates/')) {
+    const relative = assetPath.replace(/^templates\//, '');
     targetFile = path.join(templatesDir, relative);
   } else if (assetPath.startsWith('/')) {
     return;

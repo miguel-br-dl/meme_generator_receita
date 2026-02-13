@@ -27,7 +27,7 @@ templates/
 - `id` deve ser unico.
 - `fields[].key` deve ser unico.
 - `notifications[].titleKey` e `notifications[].textKey` precisam apontar para chaves de `fields`.
-- Assets relativos em `assets` (ex.: `fundo.jpg`) viram automaticamente `/templates/<slug>/fundo.jpg`.
+- Assets relativos em `assets` (ex.: `fundo.jpg`) viram automaticamente `templates/<slug>/fundo.jpg`.
 
 ## Validacao
 

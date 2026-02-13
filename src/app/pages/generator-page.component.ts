@@ -172,7 +172,7 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
         this.loading = false;
 
         if (!templates.length) {
-          this.loadError = 'Nenhum template encontrado em /templates/index.json.';
+          this.loadError = 'Nenhum template encontrado em templates/index.json.';
           return;
         }
 
