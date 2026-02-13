@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Meme generator icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#03060d"/>
+      <stop offset="100%" stop-color="#010205"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="62%" cy="34%" r="66%">
+      <stop offset="0%" stop-color="#2aa4ff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="monitor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101828"/>
+      <stop offset="100%" stop-color="#070c16"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#128ef6"/>
+      <stop offset="100%" stop-color="#2cb3ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="220" fill="url(#glow)"/>
+
+  <g transform="translate(172 202)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="430" rx="36" fill="url(#monitor)"/>
+    <rect x="16" y="16" width="648" height="398" rx="26" fill="#07101c" stroke="#2f97f2" stroke-opacity="0.55"/>
+
+    <rect x="70" y="74" width="370" height="214" rx="20" fill="#0a1320" stroke="#256fbe" stroke-opacity="0.72"/>
+    <rect x="96" y="102" width="318" height="18" rx="9" fill="#16385c" opacity="0.85"/>
+    <rect x="96" y="136" width="226" height="12" rx="6" fill="#305d8f" opacity="0.82"/>
+    <rect x="96" y="162" width="180" height="12" rx="6" fill="#386b9e" opacity="0.74"/>
+
+    <rect x="468" y="74" width="144" height="144" rx="16" fill="#0d1724" stroke="#2a83da" stroke-opacity="0.7"/>
+    <rect x="486" y="100" width="108" height="10" rx="5" fill="#376194" opacity="0.9"/>
+    <rect x="486" y="126" width="90" height="10" rx="5" fill="#3f6e9f" opacity="0.76"/>
+    <rect x="486" y="152" width="102" height="10" rx="5" fill="#4a7fb8" opacity="0.7"/>
+
+    <rect x="468" y="244" width="144" height="58" rx="14" fill="#0f2338" stroke="#319ffb" stroke-opacity="0.7"/>
+    <rect x="482" y="258" width="116" height="30" rx="10" fill="url(#btn)"/>
+
+    <rect x="70" y="312" width="370" height="76" rx="15" fill="#0b1421" stroke="#287fda" stroke-opacity="0.56"/>
+    <rect x="95" y="334" width="246" height="10" rx="5" fill="#65b8ff" opacity="0.82"/>
+    <rect x="95" y="356" width="198" height="10" rx="5" fill="#4e90d0" opacity="0.76"/>
+  </g>
+
+  <g transform="translate(430 652)">
+    <rect x="0" y="0" width="164" height="24" rx="12" fill="#0b1728"/>
+    <path d="M-78 24h320l-38 56h-244z" fill="#091423"/>
+  </g>
+</svg>
