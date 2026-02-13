@@ -29,6 +29,13 @@ https://SEU_USUARIO.github.io/NOME_DO_REPOSITORIO/
 
 Observacao: as rotas internas usam `#` (ex.: `/#/sobre`) para evitar erro 404 no refresh do GitHub Pages.
 
+### `ads.txt` no GitHub Pages
+
+- Em **Project Pages** (repo comum): `https://SEU_USUARIO.github.io/NOME_DO_REPOSITORIO/ads.txt`
+- Em **User Pages** (repo `SEU_USUARIO.github.io`): `https://SEU_USUARIO.github.io/ads.txt`
+
+Se voce precisa obrigatoriamente do `ads.txt` na raiz (`/ads.txt`), publique como **User Pages** (repo `SEU_USUARIO.github.io`) ou use dominio proprio.
+
 ## Build para Pages (manual)
 
 Para gerar artefato localmente com base-href relativo:

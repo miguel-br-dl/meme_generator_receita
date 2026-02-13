@@ -32,8 +32,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Compute base href
+        id: base_href
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          OWNER_NAME="${{ github.repository_owner }}"
+          if [ "$REPO_NAME" = "${OWNER_NAME}.github.io" ]; then
+            echo "value=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=/$REPO_NAME/" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build Angular app for GitHub Pages
-        run: npm run build:gh-pages:artifact -- --base-href "/${{ github.event.repository.name }}/"
+        run: npm run build:gh-pages:artifact -- --base-href "${{ steps.base_href.outputs.value }}"
 
       - name: Prepare Pages artifact
         run: npm run ghpages:prepare
