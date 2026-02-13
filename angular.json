@@ -23,6 +23,11 @@
             "assets": [
               "src/assets",
               {
+                "glob": "ads.txt",
+                "input": "src",
+                "output": "/"
+              },
+              {
                 "glob": "**/*",
                 "input": "templates",
                 "output": "templates"
@@ -88,6 +93,11 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/assets",
+              {
+                "glob": "ads.txt",
+                "input": "src",
+                "output": "/"
+              },
               {
                 "glob": "**/*",
                 "input": "templates",

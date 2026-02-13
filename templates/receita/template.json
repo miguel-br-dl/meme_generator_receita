@@ -1,7 +1,7 @@
 {
   "id": "receita-iphone-v1",
   "name": "Receita no iPhone (v1)",
-  "description": "Tela de bloqueio com duas notificações da Receita.",
+  "description": "Tela de bloqueio com três notificações da Receita.",
   "assets": {
     "background": "fundo.jpg",
     "appIcon": "app.png",
@@ -35,13 +35,29 @@
       "placeholder": "Ex.: Legal esse aparelho! Mede pilha mesmo?",
       "type": "textarea",
       "maxLength": 120
+    },
+    {
+      "key": "titulo3",
+      "label": "Título 3",
+      "placeholder": "Ex.: Receita Federal respondeu seu stories",
+      "type": "text",
+      "maxLength": 80
+    },
+    {
+      "key": "texto3",
+      "label": "Texto 3",
+      "placeholder": "Ex.: TEmos uma vidade para você.",
+      "type": "textarea",
+      "maxLength": 120
     }
   ],
   "defaults": {
     "titulo1": "Receita Federal começou a te seguir",
     "texto1": "seguir de volta",
     "titulo2": "Receita Federal curtiu a sua foto",
-    "texto2": "Legal esse aparelho! Mede pilha mesmo?"
+    "texto2": "Legal esse aparelho! Mede pilha mesmo?",
+    "titulo3": "Receita Federal respondeu seu stories",
+    "texto3": "TEmos uma vidade para você."
   },
   "notifications": [
     {
@@ -52,6 +68,11 @@
     {
       "titleKey": "titulo2",
       "textKey": "texto2",
+      "timeLabel": "agora"
+    },
+    {
+      "titleKey": "titulo3",
+      "textKey": "texto3",
       "timeLabel": "agora"
     }
   ],
