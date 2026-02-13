@@ -1,0 +1,48 @@
+{
+  "name": "meme-generator-receita",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "templates:build": "node scripts/build-templates-index.mjs",
+    "templates:check": "node scripts/build-templates-index.mjs --check",
+    "ghpages:prepare": "node scripts/prepare-gh-pages.mjs",
+    "build:gh-pages": "npm run build -- --configuration production --base-href ./",
+    "build:gh-pages:repo": "npm run build -- --configuration production --base-href /$npm_package_name/",
+    "build:gh-pages:artifact": "npm run build -- --configuration production",
+    "prestart": "npm run templates:build",
+    "prebuild": "npm run templates:build",
+    "pretest": "npm run templates:build",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.3.12",
+    "@angular/common": "^17.3.12",
+    "@angular/compiler": "^17.3.12",
+    "@angular/core": "^17.3.12",
+    "@angular/forms": "^17.3.12",
+    "@angular/platform-browser": "^17.3.12",
+    "@angular/platform-browser-dynamic": "^17.3.12",
+    "@angular/router": "^17.3.12",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.12",
+    "@angular/cli": "^17.3.12",
+    "@angular/compiler-cli": "^17.3.12",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.4.5"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "receita-iphone-v1",
+  "name": "Receita no iPhone (v1)",
+  "description": "Tela de bloqueio com duas notificações da Receita.",
+  "assets": {
+    "background": "fundo.jpg",
+    "appIcon": "app.png",
+    "preview": "preview.jpg"
+  },
+  "fields": [
+    {
+      "key": "titulo1",
+      "label": "Título 1",
+      "placeholder": "Ex.: Receita Federal começou a te seguir",
+      "type": "text",
+      "maxLength": 80
+    },
+    {
+      "key": "texto1",
+      "label": "Texto 1",
+      "placeholder": "Ex.: seguir de volta",
+      "type": "textarea",
+      "maxLength": 120
+    },
+    {
+      "key": "titulo2",
+      "label": "Título 2",
+      "placeholder": "Ex.: Receita Federal curtiu a sua foto",
+      "type": "text",
+      "maxLength": 80
+    },
+    {
+      "key": "texto2",
+      "label": "Texto 2",
+      "placeholder": "Ex.: Legal esse aparelho! Mede pilha mesmo?",
+      "type": "textarea",
+      "maxLength": 120
+    }
+  ],
+  "defaults": {
+    "titulo1": "Receita Federal começou a te seguir",
+    "texto1": "seguir de volta",
+    "titulo2": "Receita Federal curtiu a sua foto",
+    "texto2": "Legal esse aparelho! Mede pilha mesmo?"
+  },
+  "notifications": [
+    {
+      "titleKey": "titulo1",
+      "textKey": "texto1",
+      "timeLabel": "agora"
+    },
+    {
+      "titleKey": "titulo2",
+      "textKey": "texto2",
+      "timeLabel": "agora"
+    }
+  ],
+  "preview": {
+    "time": "10:30",
+    "subtitle": "2026",
+    "battery": "90%",
+    "notificationTime": "agora"
+  }
+}
