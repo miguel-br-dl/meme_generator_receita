@@ -38,6 +38,7 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
   loadError = '';
   downloading = false;
   downloadError = '';
+  templateMetaCollapsed = false;
 
   private dynamicKeys = new Set<string>();
   private readonly destroy$ = new Subject<void>();
@@ -99,6 +100,10 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
 
   trackByKey(_index: number, field: TemplateField): string {
     return field.key;
+  }
+
+  toggleTemplateMeta(): void {
+    this.templateMetaCollapsed = !this.templateMetaCollapsed;
   }
 
   async downloadPreviewImage(): Promise<void> {

@@ -18,14 +18,30 @@
         styleClass="w-full"
       ></p-dropdown>
 
-      <section class="template-meta" *ngIf="selectedTemplate as tpl">
-        <p class="template-description">{{ tpl.description }}</p>
-        <img
-          *ngIf="tpl.assets.preview"
-          class="template-thumb"
-          [src]="tpl.assets.preview"
-          [alt]="'Preview de ' + tpl.name"
-        />
+      <section class="template-meta" *ngIf="selectedTemplate as tpl" [class.collapsed]="templateMetaCollapsed">
+        <div class="template-meta-header">
+          <p class="template-meta-title">Detalhes do template</p>
+          <button
+            type="button"
+            class="template-meta-toggle"
+            (click)="toggleTemplateMeta()"
+            [attr.aria-expanded]="!templateMetaCollapsed"
+            [attr.aria-label]="templateMetaCollapsed ? 'Expandir detalhes do template' : 'Minimizar detalhes do template'"
+          >
+            <span class="toggle-diamond" aria-hidden="true"></span>
+            <span>{{ templateMetaCollapsed ? '+' : '-' }}</span>
+          </button>
+        </div>
+
+        <div class="template-meta-content" *ngIf="!templateMetaCollapsed">
+          <p class="template-description">{{ tpl.description }}</p>
+          <img
+            *ngIf="tpl.assets.preview"
+            class="template-thumb"
+            [src]="tpl.assets.preview"
+            [alt]="'Preview de ' + tpl.name"
+          />
+        </div>
       </section>
 
       <ng-container *ngFor="let field of fields; trackBy: trackByKey">
