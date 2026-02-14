@@ -5,7 +5,7 @@
   "assets": {
     "background": "fundo.jpg",
     "appIcon": "app.png",
-    "preview": "meme-generator-cinematic.svg"
+    "preview": "meme-generator.png"
   },
   "fields": [
     {
@@ -46,7 +46,7 @@
     {
       "key": "texto3",
       "label": "Texto 3",
-      "placeholder": "Ex.: Temos uma vidade para você.",
+      "placeholder": "Ex.: Temos uma novidade para você.",
       "type": "textarea",
       "maxLength": 120
     }
@@ -57,7 +57,7 @@
     "titulo2": "Receita Federal curtiu a sua foto",
     "texto2": "Legal esse aparelho! Mede pilha mesmo?",
     "titulo3": "Receita Federal respondeu seu stories",
-    "texto3": "Temos uma vidade para você."
+    "texto3": "Temos uma novidade para você."
   },
   "notifications": [
     {

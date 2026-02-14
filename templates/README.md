@@ -9,7 +9,7 @@ templates/
   receita/
     template.json
     fundo.jpg
-    meme-generator-icon.svg
+    app.png
     meme-generator-cinematic.svg
     preview.jpg (opcional)
 ```
