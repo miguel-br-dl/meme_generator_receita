@@ -11,38 +11,8 @@ declare global {
   selector: 'app-adsense-block',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <section class="ads-wrapper">
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-2236242824534513"
-        [attr.data-ad-slot]="adSlot"
-        [attr.data-ad-format]="adFormat"
-        [attr.data-full-width-responsive]="fullWidthResponsive ? 'true' : 'false'"
-      ></ins>
-      <small class="ads-note">
-        Client AdSense configurado. Agora falta apenas definir os <code>adSlot</code> reais.
-      </small>
-    </section>
-  `,
-  styles: [
-    `
-      .ads-wrapper {
-        margin-top: 1.5rem;
-        border: 1px dashed #cbd5e1;
-        border-radius: 10px;
-        background: #fff;
-        padding: 1rem;
-      }
-
-      .ads-note {
-        display: block;
-        margin-top: 0.8rem;
-        color: #64748b;
-      }
-    `
-  ]
+  templateUrl: './adsense-block.component.html',
+  styleUrls: ['./adsense-block.component.css']
 })
 export class AdsenseBlockComponent implements AfterViewInit {
   @Input() adSlot = '0000000000';

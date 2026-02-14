@@ -1,0 +1,53 @@
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-toolbar {
+  border-radius: 0;
+  border: none;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+}
+
+.brand {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #334155;
+}
+
+.nav-links a.active {
+  color: #0b5fff;
+}
+
+.page-shell {
+  width: min(1160px, 100% - 2rem);
+  margin: 1.25rem auto;
+  flex: 1;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

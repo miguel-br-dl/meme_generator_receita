@@ -1,0 +1,13 @@
+.ads-wrapper {
+  margin-top: 1.5rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  padding: 1rem;
+}
+
+.ads-note {
+  display: block;
+  margin-top: 0.8rem;
+  color: #64748b;
+}

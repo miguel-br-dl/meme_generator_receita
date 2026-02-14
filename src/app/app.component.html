@@ -1,0 +1,20 @@
+<p-toolbar styleClass="top-toolbar">
+  <ng-template pTemplate="start">
+    <a routerLink="/" class="brand">Meme Generator</a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <nav class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Gerador</a>
+      <a routerLink="/sobre" routerLinkActive="active">Sobre</a>
+      <a routerLink="/politica-de-privacidade" routerLinkActive="active">Privacidade</a>
+    </nav>
+  </ng-template>
+</p-toolbar>
+
+<main class="page-shell">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <small>© 2026 Meme Generator Receita</small>
+</footer>

@@ -9,9 +9,9 @@ templates/
   receita/
     template.json
     fundo.jpg
-    app.png
+    meme-generator-icon.svg
+    meme-generator-cinematic.svg
     preview.jpg (opcional)
-    template-base.html (referencia visual)
 ```
 
 ## Passo a passo

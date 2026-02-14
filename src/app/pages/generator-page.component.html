@@ -1,0 +1,67 @@
+<section class="generator-grid">
+  <p-card header="Configuração do Meme">
+    <p class="panel-text">Selecione um template e personalize os campos obrigatórios.</p>
+
+    <p *ngIf="loading" class="feedback">Carregando templates...</p>
+    <p *ngIf="loadError" class="feedback error">{{ loadError }}</p>
+
+    <form [formGroup]="form" class="editor-form" *ngIf="!loading && !loadError">
+      <label for="templateId">Template</label>
+      <p-dropdown
+        inputId="templateId"
+        formControlName="templateId"
+        [options]="templates"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Selecione um template"
+        [showClear]="false"
+        styleClass="w-full"
+      ></p-dropdown>
+
+      <section class="template-meta" *ngIf="selectedTemplate as tpl">
+        <p class="template-description">{{ tpl.description }}</p>
+        <img
+          *ngIf="tpl.assets.preview"
+          class="template-thumb"
+          [src]="tpl.assets.preview"
+          [alt]="'Preview de ' + tpl.name"
+        />
+      </section>
+
+      <ng-container *ngFor="let field of fields; trackBy: trackByKey">
+        <label [for]="field.key">{{ field.label }}</label>
+
+        <input
+          *ngIf="field.type === 'text'"
+          pInputText
+          [id]="field.key"
+          [placeholder]="field.placeholder || ''"
+          [formControlName]="field.key"
+          [attr.maxlength]="field.maxLength || null"
+        />
+
+        <textarea
+          *ngIf="field.type === 'textarea'"
+          pInputTextarea
+          [id]="field.key"
+          [placeholder]="field.placeholder || ''"
+          [formControlName]="field.key"
+          [attr.maxlength]="field.maxLength || null"
+          [autoResize]="true"
+          rows="3"
+        ></textarea>
+      </ng-container>
+    </form>
+  </p-card>
+
+  <p-card header="Pré-visualização">
+    <app-meme-preview [template]="selectedTemplate" [values]="previewValues"></app-meme-preview>
+
+    <div class="preview-actions">
+      <button type="button" class="download-button" (click)="downloadPreviewImage()" [disabled]="!selectedTemplate || downloading">
+        {{ downloading ? 'Gerando imagem...' : 'Baixar imagem' }}
+      </button>
+      <p *ngIf="downloadError" class="feedback error">{{ downloadError }}</p>
+    </div>
+  </p-card>
+</section>

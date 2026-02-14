@@ -1,0 +1,39 @@
+<div class="preview-shell" *ngIf="template as tpl; else emptyState">
+  <article #previewCard class="iphone" [style.background-image]="'url(' + tpl.assets.background + ')'">
+    <div class="iphone-overlay" aria-hidden="true"></div>
+    <div class="status-bar">
+      <div>📶</div>
+      <div class="battery">
+        <span>{{ tpl.preview.battery }}</span>
+        <div class="battery-icon">
+          <div class="battery-level"></div>
+          <div class="battery-tip" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="time">
+      <h1>{{ tpl.preview.time }}</h1>
+      <span>{{ tpl.preview.subtitle }}</span>
+    </div>
+
+    <div class="notifications">
+      <div class="notification" *ngFor="let slot of tpl.notifications">
+        <div class="badge">
+          <img [src]="tpl.assets.appIcon" alt="App" />
+        </div>
+        <div class="notification-content">
+          <div class="notification-header">
+            <strong>{{ resolve(slot.titleKey) }}</strong>
+            <span class="notification-time">{{ slot.timeLabel || tpl.preview.notificationTime }}</span>
+          </div>
+          <div class="notification-text">{{ resolve(slot.textKey) }}</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<ng-template #emptyState>
+  <p class="empty-state">Selecione um template para pré-visualizar.</p>
+</ng-template>
