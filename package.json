@@ -5,7 +5,10 @@
   "scripts": {
     "templates:build": "node scripts/build-templates-index.mjs",
     "templates:check": "node scripts/build-templates-index.mjs --check",
+    "templates:incorporar": "bash scripts/incorporar-templates.sh",
     "ghpages:prepare": "node scripts/prepare-gh-pages.mjs",
+    "git:prepare": "node scripts/prepare-git.mjs",
+    "github:prepare": "bash scripts/preparar-github.sh",
     "build:gh-pages": "npm run build -- --configuration production --base-href ./",
     "build:gh-pages:repo": "npm run build -- --configuration production --base-href /$npm_package_name/",
     "build:gh-pages:artifact": "npm run build -- --configuration production",

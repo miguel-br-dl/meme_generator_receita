@@ -11,6 +11,36 @@ npm start
 
 App local: `http://localhost:4200/`
 
+## Preparar commit/push
+
+```bash
+npm run git:prepare
+```
+
+Opcoes:
+
+- `npm run git:prepare -- --no-build` (mais rapido, sem build)
+- `npm run git:prepare -- --with-test` (inclui testes)
+
+## Scripts Linux
+
+Para incorporar novos templates:
+
+```bash
+./scripts/incorporar-templates.sh
+```
+
+Para preparar tudo para envio ao GitHub:
+
+```bash
+./scripts/preparar-github.sh
+```
+
+Atalhos via npm:
+
+- `npm run templates:incorporar`
+- `npm run github:prepare`
+
 ## Deploy no GitHub Pages
 
 Este projeto ja esta preparado para deploy automatico via GitHub Actions.
