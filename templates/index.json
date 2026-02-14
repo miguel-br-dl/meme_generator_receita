@@ -5,7 +5,7 @@
     "description": "Tela de bloqueio com três notificações da Receita.",
     "assets": {
       "background": "templates/receita/fundo.jpg",
-      "appIcon": "templates/receita/meme-generator-icon.svg",
+      "appIcon": "templates/receita/app.png",
       "preview": "templates/receita/meme-generator-cinematic.svg"
     },
     "fields": [
