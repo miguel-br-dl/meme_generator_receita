@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
 import { distinctUntilChanged, Subject, take, takeUntil } from 'rxjs';
@@ -81,6 +81,13 @@ import { MemePreviewComponent } from '../components/meme-preview.component';
 
       <p-card header="Pré-visualização">
         <app-meme-preview [template]="selectedTemplate" [values]="previewValues"></app-meme-preview>
+
+        <div class="preview-actions">
+          <button type="button" class="download-button" (click)="downloadPreviewImage()" [disabled]="!selectedTemplate || downloading">
+            {{ downloading ? 'Gerando imagem...' : 'Baixar imagem' }}
+          </button>
+          <p *ngIf="downloadError" class="feedback error">{{ downloadError }}</p>
+        </div>
       </p-card>
     </section>
   `,
@@ -137,6 +144,29 @@ import { MemePreviewComponent } from '../components/meme-preview.component';
         color: #b91c1c;
       }
 
+      .preview-actions {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .download-button {
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #0ea5e9, #0284c7);
+        color: #fff;
+        font-weight: 700;
+        padding: 0.65rem 1rem;
+        cursor: pointer;
+      }
+
+      .download-button:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
       @media (max-width: 980px) {
         .generator-grid {
           grid-template-columns: 1fr;
@@ -146,6 +176,8 @@ import { MemePreviewComponent } from '../components/meme-preview.component';
   ]
 })
 export class GeneratorPageComponent implements OnInit, OnDestroy {
+  @ViewChild(MemePreviewComponent) private previewComponent?: MemePreviewComponent;
+
   readonly form = this.formBuilder.group({
     templateId: ['']
   });
@@ -154,6 +186,8 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
   selectedTemplate: MemeTemplate | null = null;
   loading = true;
   loadError = '';
+  downloading = false;
+  downloadError = '';
 
   private dynamicKeys = new Set<string>();
   private readonly destroy$ = new Subject<void>();
@@ -217,6 +251,32 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
     return field.key;
   }
 
+  async downloadPreviewImage(): Promise<void> {
+    if (!this.selectedTemplate || !this.previewComponent || this.downloading) {
+      return;
+    }
+
+    this.downloadError = '';
+    this.downloading = true;
+
+    try {
+      const blob = await this.previewComponent.renderPngBlob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = `${this.fileNameFromTemplate(this.selectedTemplate.name)}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+    } catch (error) {
+      console.error(error);
+      this.downloadError = 'Nao foi possivel baixar a imagem agora. Tente novamente.';
+    } finally {
+      this.downloading = false;
+    }
+  }
+
   private applyTemplate(templateId: string | null): void {
     if (!templateId) {
       return;
@@ -251,5 +311,16 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
     }
 
     this.dynamicKeys = nextKeys;
+  }
+
+  private fileNameFromTemplate(name: string): string {
+    const normalized = name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
+    return normalized || 'meme';
   }
 }
