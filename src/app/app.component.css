@@ -4,50 +4,36 @@
   flex-direction: column;
 }
 
-.top-toolbar {
-  border-radius: 0;
-  border: none;
-  background: linear-gradient(90deg, rgba(255, 214, 98, 0.95), rgba(244, 185, 38, 0.92));
-  box-shadow: 0 12px 26px rgba(99, 65, 3, 0.16);
-}
-
 .brand {
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   font-family: "Brush Script MT", "Segoe Script", "Lucida Handwriting", cursive;
   color: #5f4305;
-  line-height: 1;
+  line-height: 1.1;
+  transition: opacity 0.2s ease;
 }
 
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-weight: 700;
-  color: #6a4d12;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: #4f3700;
-  border-color: rgba(79, 55, 0, 0.3);
-}
-
-.nav-links a.active {
-  color: #4f3700;
-  border-color: #4f3700;
+.brand:hover {
+  opacity: 0.84;
 }
 
 .page-shell {
   width: min(1160px, 100% - 2rem);
   margin: 1.4rem auto 1.2rem;
   flex: 1;
+}
+
+.mini-header {
+  margin-bottom: 0.85rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(255, 214, 98, 0.95), rgba(244, 185, 38, 0.92));
+  border: 1px solid rgba(157, 117, 23, 0.25);
+  box-shadow: 0 8px 18px rgba(99, 65, 3, 0.12);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .footer {
@@ -59,11 +45,6 @@
 
 @media (max-width: 768px) {
   .brand {
-    font-size: 1.6rem;
-  }
-
-  .nav-links {
-    gap: 0.75rem;
-    font-size: 0.9rem;
+    font-size: 1.25rem;
   }
 }
