@@ -7,15 +7,18 @@
 .top-toolbar {
   border-radius: 0;
   border: none;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(90deg, rgba(255, 214, 98, 0.95), rgba(244, 185, 38, 0.92));
+  box-shadow: 0 12px 26px rgba(99, 65, 3, 0.16);
 }
 
 .brand {
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  font-family: "Brush Script MT", "Segoe Script", "Lucida Handwriting", cursive;
+  color: #5f4305;
+  line-height: 1;
 }
 
 .nav-links {
@@ -25,27 +28,40 @@
 
 .nav-links a {
   text-decoration: none;
-  font-weight: 600;
-  color: #334155;
+  font-weight: 700;
+  color: #6a4d12;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #4f3700;
+  border-color: rgba(79, 55, 0, 0.3);
 }
 
 .nav-links a.active {
-  color: #0b5fff;
+  color: #4f3700;
+  border-color: #4f3700;
 }
 
 .page-shell {
   width: min(1160px, 100% - 2rem);
-  margin: 1.25rem auto;
+  margin: 1.4rem auto 1.2rem;
   flex: 1;
 }
 
 .footer {
   text-align: center;
   padding: 1rem;
-  color: #64748b;
+  color: #6c5318;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
+  .brand {
+    font-size: 1.6rem;
+  }
+
   .nav-links {
     gap: 0.75rem;
     font-size: 0.9rem;

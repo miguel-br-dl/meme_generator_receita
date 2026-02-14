@@ -1,9 +1,14 @@
 :root {
-  --bg: #f2f4f7;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #475569;
-  --brand: #0b5fff;
+  --sun-100: #fff7de;
+  --sun-200: #ffe9ad;
+  --sun-300: #ffd97a;
+  --sun-400: #ffc637;
+  --sun-500: #f4b926;
+  --sun-600: #c29834;
+  --sun-700: #9d7517;
+  --ink-strong: #4d3809;
+  --ink-soft: #6c5318;
+  --panel: rgba(255, 250, 233, 0.9);
 }
 
 * {
@@ -14,11 +19,86 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: radial-gradient(circle at top left, #eef6ff 0%, var(--bg) 50%, #e9eef4 100%);
-  color: var(--text);
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--ink-strong);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Tahoma", sans-serif;
+}
+
+body {
+  position: relative;
+  background:
+    linear-gradient(165deg, rgba(255, 242, 191, 0.95) 0%, rgba(255, 233, 158, 0.92) 45%, rgba(255, 248, 224, 0.9) 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.28)),
+    url("assets/ameliacui.jpg") center top / cover no-repeat;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.62), transparent 36%),
+    radial-gradient(circle at 86% 14%, rgba(255, 247, 204, 0.62), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.34), transparent 45%);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 a {
   color: inherit;
+}
+
+.p-card {
+  background: var(--panel);
+  border: 1px solid rgba(194, 152, 52, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(132, 94, 12, 0.14);
+}
+
+.p-card .p-card-title {
+  color: var(--ink-strong);
+  font-weight: 800;
+}
+
+.p-card .p-card-content {
+  color: var(--ink-soft);
+}
+
+.p-inputtext,
+.p-dropdown,
+.p-inputtextarea {
+  border-color: rgba(194, 152, 52, 0.45);
+  background: rgba(255, 252, 242, 0.95);
+}
+
+.p-inputtext:enabled:hover,
+.p-inputtextarea:enabled:hover,
+.p-dropdown:not(.p-disabled):hover {
+  border-color: var(--sun-600);
+}
+
+.p-inputtext:enabled:focus,
+.p-inputtextarea:enabled:focus,
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 198, 55, 0.22);
+  border-color: var(--sun-500);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: rgba(255, 198, 55, 0.22);
+  color: var(--ink-strong);
 }
