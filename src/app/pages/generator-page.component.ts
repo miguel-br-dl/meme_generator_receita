@@ -39,6 +39,7 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
   downloading = false;
   downloadError = '';
   templateMetaCollapsed = false;
+  imageFieldNames: Record<string, string> = {};
 
   private dynamicKeys = new Set<string>();
   private readonly destroy$ = new Subject<void>();
@@ -106,6 +107,34 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
     this.templateMetaCollapsed = !this.templateMetaCollapsed;
   }
 
+  onImageSelected(fieldKey: string, event: Event): void {
+    const input = event.target as HTMLInputElement | null;
+    const file = input?.files?.[0];
+
+    if (!file) {
+      this.form.get(fieldKey)?.setValue('', { emitEvent: false });
+      this.imageFieldNames[fieldKey] = '';
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      this.form.get(fieldKey)?.setValue('', { emitEvent: false });
+      this.imageFieldNames[fieldKey] = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.form.get(fieldKey)?.setValue(String(reader.result ?? ''), { emitEvent: false });
+      this.imageFieldNames[fieldKey] = file.name;
+    };
+    reader.onerror = () => {
+      this.form.get(fieldKey)?.setValue('', { emitEvent: false });
+      this.imageFieldNames[fieldKey] = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
   async downloadPreviewImage(): Promise<void> {
     if (!this.selectedTemplate || !this.previewComponent || this.downloading) {
       return;
@@ -161,10 +190,11 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
         this.form.addControl(field.key, this.formBuilder.control(''));
       }
 
-      const defaultValue = template.defaults[field.key] ?? '';
+      const defaultValue = template.defaults[field.key] ?? field.options?.[0]?.value ?? '';
       this.form.get(field.key)?.setValue(defaultValue, { emitEvent: false });
     }
 
+    this.imageFieldNames = {};
     this.dynamicKeys = nextKeys;
   }
 

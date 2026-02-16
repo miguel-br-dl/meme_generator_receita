@@ -94,6 +94,26 @@ label {
   color: #5f450d;
 }
 
+.image-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.image-field input[type="file"] {
+  border: 1px dashed rgba(157, 117, 23, 0.52);
+  border-radius: 12px;
+  background: rgba(255, 250, 233, 0.82);
+  color: #5f450d;
+  padding: 0.5rem;
+}
+
+.image-field-name {
+  margin: 0;
+  font-size: 0.83rem;
+  color: #6f571a;
+}
+
 .feedback {
   margin: 0.5rem 0;
   color: #5f450d;

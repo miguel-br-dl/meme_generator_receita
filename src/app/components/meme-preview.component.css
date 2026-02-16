@@ -151,3 +151,73 @@
   margin: 0;
   color: #64748b;
 }
+
+.descanse-card {
+  width: min(390px, 100%);
+  aspect-ratio: 1179 / 2096;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 1.1rem 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.descanse-top {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.3rem, 5.2vw, 2.15rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+  font-family: "Times New Roman", "Bookman Old Style", Georgia, serif;
+  color: #181818;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  min-height: 9%;
+}
+
+.descanse-photo-frame {
+  position: absolute;
+  left: 18.5%;
+  top: 19.8%;
+  width: 62.9%;
+  height: 47.8%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(248, 252, 255, 0.35);
+}
+
+.descanse-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.descanse-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(26, 37, 53, 0.82);
+  text-align: center;
+  padding: 1rem;
+}
+
+.descanse-bottom {
+  margin: auto 1.15rem 0.45rem;
+  text-align: center;
+  font-size: clamp(1rem, 3.2vw, 1.25rem);
+  line-height: 1.35;
+  color: #252525;
+  font-family: "Comic Sans MS", "Marker Felt", "Chalkboard SE", cursive;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 16px;
+  padding: 0.7rem 0.8rem;
+  box-shadow: 0 4px 12px rgba(29, 50, 82, 0.12);
+}

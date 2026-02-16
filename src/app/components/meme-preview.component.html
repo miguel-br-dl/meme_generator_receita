@@ -1,5 +1,5 @@
 <div class="preview-shell" *ngIf="template as tpl; else emptyState">
-  <article #previewCard class="iphone" [style.background-image]="'url(' + tpl.assets.background + ')'">
+  <article *ngIf="!isDescanseLayout(); else descanseLayout" #previewCard class="iphone" [style.background-image]="'url(' + tpl.assets.background + ')'">
     <div class="iphone-overlay" aria-hidden="true"></div>
     <div class="status-bar">
       <div>📶</div>
@@ -32,6 +32,19 @@
       </div>
     </div>
   </article>
+
+  <ng-template #descanseLayout>
+    <article #previewCard class="descanse-card" [style.background-image]="'url(' + tpl.assets.background + ')'">
+      <h2 class="descanse-top">{{ resolve('textoTopo') }}</h2>
+
+      <div class="descanse-photo-frame">
+        <img *ngIf="resolve('foto')" [src]="resolve('foto')" alt="Foto da pessoa do meme" />
+        <div *ngIf="!resolve('foto')" class="descanse-photo-placeholder">Envie uma foto</div>
+      </div>
+
+      <p class="descanse-bottom">{{ resolve('textoRodape') }}</p>
+    </article>
+  </ng-template>
 </div>
 
 <ng-template #emptyState>

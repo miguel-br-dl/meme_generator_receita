@@ -101,12 +101,49 @@ function validateFields(fields) {
 
     getString(field.label, `fields[${index}].label`);
 
-    if (field.type !== 'text' && field.type !== 'textarea') {
-      throw new Error(`fields[${index}].type deve ser "text" ou "textarea"`);
+    if (field.type !== 'text' && field.type !== 'textarea' && field.type !== 'select' && field.type !== 'image') {
+      throw new Error(`fields[${index}].type deve ser "text", "textarea", "select" ou "image"`);
+    }
+
+    if (field.type === 'select') {
+      if (!Array.isArray(field.options) || field.options.length === 0) {
+        throw new Error(`fields[${index}].options deve ser uma lista com pelo menos 1 item`);
+      }
+
+      const values = new Set();
+
+      field.options.forEach((option, optionIndex) => {
+        if (!option || typeof option !== 'object') {
+          throw new Error(`fields[${index}].options[${optionIndex}] deve ser objeto`);
+        }
+
+        const label = getString(option.label, `fields[${index}].options[${optionIndex}].label`);
+        const value = getString(option.value, `fields[${index}].options[${optionIndex}].value`);
+
+        if (values.has(value)) {
+          throw new Error(`fields[${index}].options possui value duplicado: ${value}`);
+        }
+
+        if (!label.trim()) {
+          throw new Error(`fields[${index}].options[${optionIndex}].label invalido`);
+        }
+
+        values.add(value);
+      });
     }
   });
 
   return seen;
+}
+
+function validateLayout(layout) {
+  if (layout === undefined) {
+    return;
+  }
+
+  if (layout !== 'iphone' && layout !== 'descanse') {
+    throw new Error('layout deve ser "iphone" ou "descanse" quando informado');
+  }
 }
 
 function normalizeDefaults(defaults, fieldKeys) {
@@ -130,6 +167,26 @@ function normalizeDefaults(defaults, fieldKeys) {
   }
 
   return normalized;
+}
+
+function validateDefaultOptions(fields, defaults) {
+  fields.forEach((field, index) => {
+    if (field.type !== 'select' || !Array.isArray(field.options) || !field.options.length) {
+      return;
+    }
+
+    const defaultValue = defaults[field.key];
+
+    if (!defaultValue) {
+      return;
+    }
+
+    const valid = field.options.some((option) => option.value === defaultValue);
+
+    if (!valid) {
+      throw new Error(`defaults.${field.key} deve existir em fields[${index}].options`);
+    }
+  });
 }
 
 function validateNotifications(notifications, fieldKeys) {
@@ -179,6 +236,7 @@ async function loadTemplateManifest(slug) {
   const id = getString(manifest.id, `${slug}.id`);
   const name = getString(manifest.name, `${slug}.name`);
   const description = getString(manifest.description, `${slug}.description`);
+  validateLayout(manifest.layout);
 
   if (!manifest.assets || typeof manifest.assets !== 'object') {
     throw new Error('assets e obrigatorio');
@@ -192,6 +250,7 @@ async function loadTemplateManifest(slug) {
 
   const fieldKeys = validateFields(manifest.fields);
   const defaults = normalizeDefaults(manifest.defaults, fieldKeys);
+  validateDefaultOptions(manifest.fields, defaults);
   validateNotifications(manifest.notifications, fieldKeys);
   validatePreview(manifest.preview);
 
@@ -210,6 +269,7 @@ async function loadTemplateManifest(slug) {
     id,
     name,
     description,
+    layout: manifest.layout,
     assets: normalizedAssets,
     fields: manifest.fields,
     defaults,

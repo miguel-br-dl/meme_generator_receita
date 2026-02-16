@@ -66,6 +66,29 @@
           [autoResize]="true"
           rows="3"
         ></textarea>
+
+        <p-dropdown
+          *ngIf="field.type === 'select'"
+          [inputId]="field.key"
+          [formControlName]="field.key"
+          [options]="field.options || []"
+          optionLabel="label"
+          optionValue="value"
+          [placeholder]="field.placeholder || 'Selecione uma opção'"
+          [showClear]="false"
+          styleClass="w-full"
+        ></p-dropdown>
+
+        <div *ngIf="field.type === 'image'" class="image-field">
+          <input
+            type="file"
+            [id]="field.key"
+            accept="image/*"
+            (change)="onImageSelected(field.key, $event)"
+          />
+          <p class="image-field-name" *ngIf="imageFieldNames[field.key]">{{ imageFieldNames[field.key] }}</p>
+          <p class="image-field-name" *ngIf="!imageFieldNames[field.key]">Nenhuma imagem selecionada.</p>
+        </div>
       </ng-container>
     </form>
   </p-card>

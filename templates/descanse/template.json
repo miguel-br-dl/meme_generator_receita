@@ -1,0 +1,74 @@
+{
+  "id": "descanse-molde-v1",
+  "name": "Descanse no Molde (v1)",
+  "description": "Meme com texto dramático no topo, foto central e mensagem final em tom humorístico.",
+  "layout": "descanse",
+  "assets": {
+    "background": "molde.jpeg",
+    "appIcon": "molde.jpeg",
+    "preview": "molde.jpeg"
+  },
+  "fields": [
+    {
+      "key": "nome",
+      "label": "Nome",
+      "placeholder": "Ex.: Fulano",
+      "type": "text",
+      "maxLength": 60
+    },
+    {
+      "key": "genero",
+      "label": "Gênero",
+      "type": "select",
+      "options": [
+        {
+          "label": "Feminino",
+          "value": "feminino"
+        },
+        {
+          "label": "Masculino",
+          "value": "masculino"
+        }
+      ]
+    },
+    {
+      "key": "textoTopo",
+      "label": "Texto de Cima",
+      "placeholder": "Ex.: Descanse {nome}",
+      "type": "text",
+      "maxLength": 90
+    },
+    {
+      "key": "textoRodape",
+      "label": "Texto de Baixo",
+      "placeholder": "Ex.: Viemos informar que {nossa} {colaborador} {nome} vai estar em férias...",
+      "type": "textarea",
+      "maxLength": 320
+    },
+    {
+      "key": "foto",
+      "label": "Foto",
+      "type": "image"
+    }
+  ],
+  "defaults": {
+    "nome": "Fulano",
+    "genero": "feminino",
+    "textoTopo": "Descanse {nome}",
+    "textoRodape": "Viemos informar que {nossa} {colaborador} {nome} vai estar em férias no próximo mês para um merecido descanso. Parabéns {nome} por sua dedicação.",
+    "foto": ""
+  },
+  "notifications": [
+    {
+      "titleKey": "textoTopo",
+      "textKey": "textoRodape",
+      "timeLabel": "agora"
+    }
+  ],
+  "preview": {
+    "time": "10:30",
+    "subtitle": "2026",
+    "battery": "90%",
+    "notificationTime": "agora"
+  }
+}

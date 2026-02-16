@@ -16,7 +16,12 @@ export class MemePreviewComponent {
   private readonly assetDataUrlCache = new Map<string, Promise<string>>();
 
   resolve(key: string): string {
-    return this.values[key] ?? this.template?.defaults[key] ?? '';
+    const raw = this.values[key] ?? this.template?.defaults[key] ?? '';
+    return this.interpolateTemplateText(raw);
+  }
+
+  isDescanseLayout(): boolean {
+    return this.template?.layout === 'descanse';
   }
 
   async renderPngBlob(): Promise<Blob> {
@@ -235,5 +240,30 @@ export class MemePreviewComponent {
       reader.onerror = () => reject(new Error('Falha ao converter asset em data URL.'));
       reader.readAsDataURL(blob);
     });
+  }
+
+  private interpolateTemplateText(text: string): string {
+    if (!text || !text.includes('{')) {
+      return text;
+    }
+
+    const tokens = this.getTemplateTokens();
+
+    return text.replace(/\{([a-zA-Z0-9_]+)\}/g, (_fullMatch, token) => tokens[token] ?? '');
+  }
+
+  private getTemplateTokens(): Record<string, string> {
+    const nomeValue = this.values['nome'] ?? this.template?.defaults['nome'] ?? 'Fulano';
+    const nome = nomeValue.trim() || 'Fulano';
+    const generoValue = (this.values['genero'] ?? this.template?.defaults['genero'] ?? 'feminino').toLowerCase();
+    const isMasculino = generoValue === 'masculino';
+
+    return {
+      nome,
+      genero: isMasculino ? 'Masculino' : 'Feminino',
+      colaborador: isMasculino ? 'colaborador' : 'colaboradora',
+      nossa: isMasculino ? 'nosso' : 'nossa',
+      ao: isMasculino ? 'ao' : 'a'
+    };
   }
 }

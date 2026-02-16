@@ -25,7 +25,10 @@ templates/
 ## Regras importantes
 
 - `id` deve ser unico.
+- `layout` opcional: `iphone` (padrao) ou `descanse`.
 - `fields[].key` deve ser unico.
+- `fields[].type` aceita `text`, `textarea`, `select` e `image`.
+- Campos `select` precisam de `options` com `label` e `value`.
 - `notifications[].titleKey` e `notifications[].textKey` precisam apontar para chaves de `fields`.
 - Assets relativos em `assets` (ex.: `fundo.jpg`) viram automaticamente `templates/<slug>/fundo.jpg`.
 

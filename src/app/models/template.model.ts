@@ -1,4 +1,9 @@
-export type TemplateFieldType = 'text' | 'textarea';
+export type TemplateFieldType = 'text' | 'textarea' | 'select' | 'image';
+
+export interface TemplateFieldOption {
+  label: string;
+  value: string;
+}
 
 export interface TemplateField {
   key: string;
@@ -6,6 +11,7 @@ export interface TemplateField {
   placeholder?: string;
   type: TemplateFieldType;
   maxLength?: number;
+  options?: TemplateFieldOption[];
 }
 
 export interface NotificationSlot {
@@ -25,6 +31,7 @@ export interface MemeTemplate {
   id: string;
   name: string;
   description: string;
+  layout?: 'iphone' | 'descanse';
   assets: {
     background: string;
     appIcon: string;
