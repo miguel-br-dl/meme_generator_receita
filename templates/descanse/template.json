@@ -5,8 +5,8 @@
   "layout": "descanse",
   "assets": {
     "background": "molde.jpeg",
-    "appIcon": "exemplo.png",
-    "preview": "molde.jpeg"
+    "appIcon": "exemplo.jpeg",
+    "preview": "exemplo.jpeg"
   },
   "fields": [
     {

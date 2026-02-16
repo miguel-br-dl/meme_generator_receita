@@ -81,9 +81,34 @@
   color: #6f571a;
 }
 
+.template-app-icon {
+  margin-top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  padding: 0.4rem 0.55rem;
+  border-radius: 12px;
+  border: 1px solid rgba(194, 152, 52, 0.45);
+  background: rgba(255, 249, 230, 0.9);
+  color: #5f450d;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.template-app-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(157, 117, 23, 0.4);
+  background: #fff;
+}
+
 .template-thumb {
   margin-top: 0.6rem;
-  width: 100%;
+  max-width: 100%;
+
   border-radius: 10px;
   border: 1px solid rgba(194, 152, 52, 0.5);
   box-shadow: 0 8px 18px rgba(110, 78, 11, 0.18);
