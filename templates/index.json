@@ -13,7 +13,7 @@
       {
         "key": "nome",
         "label": "Nome",
-        "placeholder": "Ex.: Fulana",
+        "placeholder": "Ex.: Fulano",
         "type": "text",
         "maxLength": 60
       },
@@ -53,7 +53,7 @@
       }
     ],
     "defaults": {
-      "nome": "Fulana",
+      "nome": "Fulano",
       "genero": "feminino",
       "textoTopo": "Descanse {nome}",
       "textoRodape": "Viemos informar que {nossa} {colaborador} {nome} vai estar em férias no próximo mês para um merecido descanso. Parabéns {nome} por sua dedicação.",

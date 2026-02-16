@@ -35,7 +35,16 @@
 
   <ng-template #descanseLayout>
     <article #previewCard class="descanse-card" [style.background-image]="'url(' + tpl.assets.background + ')'">
-      <h2 class="descanse-top">{{ resolve('textoTopo') }}</h2>
+      <svg class="descanse-top-arc" viewBox="0 0 1179 2096" aria-label="Texto superior curvado">
+        <defs>
+          <path id="descanseTopCurve" d="M 165 380 A 430 230 0 0 1 1015 380" />
+        </defs>
+        <text class="descanse-top-text">
+          <textPath href="#descanseTopCurve" startOffset="50%" text-anchor="middle">
+            {{ resolve('textoTopo') }}
+          </textPath>
+        </text>
+      </svg>
 
       <div class="descanse-photo-frame">
         <img *ngIf="resolve('foto')" [src]="resolve('foto')" alt="Foto da pessoa do meme" />
