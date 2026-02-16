@@ -253,8 +253,8 @@ export class MemePreviewComponent {
   }
 
   private getTemplateTokens(): Record<string, string> {
-    const nomeValue = this.values['nome'] ?? this.template?.defaults['nome'] ?? 'Fulano';
-    const nome = nomeValue.trim() || 'Fulano';
+    const nomeValue = this.values['nome'] ?? this.template?.defaults['nome'] ?? 'Fulana';
+    const nome = nomeValue.trim() || 'Fulana';
     const generoValue = (this.values['genero'] ?? this.template?.defaults['genero'] ?? 'feminino').toLowerCase();
     const isMasculino = generoValue === 'masculino';
 

@@ -5,14 +5,14 @@
   "layout": "descanse",
   "assets": {
     "background": "molde.jpeg",
-    "appIcon": "molde.jpeg",
+    "appIcon": "exemplo.png",
     "preview": "molde.jpeg"
   },
   "fields": [
     {
       "key": "nome",
       "label": "Nome",
-      "placeholder": "Ex.: Fulano",
+      "placeholder": "Ex.: Fulana",
       "type": "text",
       "maxLength": 60
     },
@@ -52,7 +52,7 @@
     }
   ],
   "defaults": {
-    "nome": "Fulano",
+    "nome": "Fulana",
     "genero": "feminino",
     "textoTopo": "Descanse {nome}",
     "textoRodape": "Viemos informar que {nossa} {colaborador} {nome} vai estar em férias no próximo mês para um merecido descanso. Parabéns {nome} por sua dedicação.",
