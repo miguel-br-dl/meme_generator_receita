@@ -37,6 +37,7 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
   loading = true;
   loadError = '';
   downloading = false;
+  downloadingWhatsapp = false;
   downloadError = '';
   templateMetaCollapsed = false;
   imageFieldNames: Record<string, string> = {};
@@ -136,7 +137,7 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
   }
 
   async downloadPreviewImage(): Promise<void> {
-    if (!this.selectedTemplate || !this.previewComponent || this.downloading) {
+    if (!this.selectedTemplate || !this.previewComponent || this.downloading || this.downloadingWhatsapp) {
       return;
     }
 
@@ -145,19 +146,31 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
 
     try {
       const blob = await this.previewComponent.renderPngBlob();
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = objectUrl;
-      link.download = `${this.fileNameFromTemplate(this.selectedTemplate.name)}.png`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+      this.downloadBlob(blob, `${this.fileNameFromTemplate(this.selectedTemplate.name)}.png`);
     } catch (error) {
       console.error(error);
       this.downloadError = 'Nao foi possivel baixar a imagem agora. Tente novamente.';
     } finally {
       this.downloading = false;
+    }
+  }
+
+  async downloadPreviewImageForWhatsapp(): Promise<void> {
+    if (!this.selectedTemplate || !this.previewComponent || this.downloading || this.downloadingWhatsapp) {
+      return;
+    }
+
+    this.downloadError = '';
+    this.downloadingWhatsapp = true;
+
+    try {
+      const blob = await this.previewComponent.renderWhatsAppPngBlob();
+      this.downloadBlob(blob, `${this.fileNameFromTemplate(this.selectedTemplate.name)}-whatsapp.png`);
+    } catch (error) {
+      console.error(error);
+      this.downloadError = 'Nao foi possivel gerar a versao para WhatsApp agora. Tente novamente.';
+    } finally {
+      this.downloadingWhatsapp = false;
     }
   }
 
@@ -207,5 +220,16 @@ export class GeneratorPageComponent implements OnInit, OnDestroy {
       .replace(/^-+|-+$/g, '');
 
     return normalized || 'meme';
+  }
+
+  private downloadBlob(blob: Blob, fileName: string): void {
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
   }
 }

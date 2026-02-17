@@ -24,7 +24,7 @@ export class MemePreviewComponent {
     return this.template?.layout === 'descanse';
   }
 
-  async renderPngBlob(): Promise<Blob> {
+  async renderPngBlob(scale = 2): Promise<Blob> {
     const element = this.previewCard?.nativeElement;
 
     if (!element) {
@@ -48,7 +48,6 @@ export class MemePreviewComponent {
 
     const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     const renderedImage = await this.loadImage(dataUrl);
-    const scale = 2;
     const canvas = document.createElement('canvas');
     canvas.width = width * scale;
     canvas.height = height * scale;
@@ -70,6 +69,69 @@ export class MemePreviewComponent {
         }
 
         reject(new Error('Falha ao converter imagem.'));
+      }, 'image/png');
+    });
+
+    return blob;
+  }
+
+  async renderWhatsAppPngBlob(): Promise<Blob> {
+    const previewBlob = await this.renderPngBlob(3);
+    const previewImage = await this.loadImage(await this.blobToDataUrl(previewBlob));
+    const targetSize = 1080;
+    const canvas = document.createElement('canvas');
+    canvas.width = targetSize;
+    canvas.height = targetSize;
+
+    const context = canvas.getContext('2d');
+
+    if (!context) {
+      throw new Error('Canvas indisponivel para exportacao do formato WhatsApp.');
+    }
+
+    const backgroundScale = Math.max(targetSize / previewImage.width, targetSize / previewImage.height);
+    const backgroundWidth = previewImage.width * backgroundScale;
+    const backgroundHeight = previewImage.height * backgroundScale;
+    const backgroundX = (targetSize - backgroundWidth) / 2;
+    const backgroundY = (targetSize - backgroundHeight) / 2;
+
+    context.save();
+    context.filter = 'blur(26px) saturate(0.88) brightness(0.72)';
+    context.drawImage(previewImage, backgroundX, backgroundY, backgroundWidth, backgroundHeight);
+    context.restore();
+
+    context.fillStyle = 'rgba(0, 0, 0, 0.24)';
+    context.fillRect(0, 0, targetSize, targetSize);
+
+    const padding = Math.round(targetSize * 0.07);
+    const maxWidth = targetSize - padding * 2;
+    const maxHeight = targetSize - padding * 2;
+    const previewScale = Math.min(maxWidth / previewImage.width, maxHeight / previewImage.height);
+    const cardWidth = previewImage.width * previewScale;
+    const cardHeight = previewImage.height * previewScale;
+    const cardX = (targetSize - cardWidth) / 2;
+    const cardY = (targetSize - cardHeight) / 2;
+    const cornerRadius = Math.max(12, Math.min(cardWidth, cardHeight) * 0.045);
+
+    context.save();
+    this.drawRoundedRectPath(context, cardX, cardY, cardWidth, cardHeight, cornerRadius);
+    context.clip();
+    context.drawImage(previewImage, cardX, cardY, cardWidth, cardHeight);
+    context.restore();
+
+    context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    context.lineWidth = 2;
+    this.drawRoundedRectPath(context, cardX, cardY, cardWidth, cardHeight, cornerRadius);
+    context.stroke();
+
+    const blob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((result) => {
+        if (result) {
+          resolve(result);
+          return;
+        }
+
+        reject(new Error('Falha ao converter imagem para formato WhatsApp.'));
       }, 'image/png');
     });
 
@@ -240,6 +302,37 @@ export class MemePreviewComponent {
       reader.onerror = () => reject(new Error('Falha ao converter asset em data URL.'));
       reader.readAsDataURL(blob);
     });
+  }
+
+  private blobToDataUrl(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = () => reject(new Error('Falha ao converter blob para data URL.'));
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  private drawRoundedRectPath(
+    context: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number
+  ): void {
+    const safeRadius = Math.max(0, Math.min(radius, Math.min(width, height) / 2));
+    context.beginPath();
+    context.moveTo(x + safeRadius, y);
+    context.lineTo(x + width - safeRadius, y);
+    context.quadraticCurveTo(x + width, y, x + width, y + safeRadius);
+    context.lineTo(x + width, y + height - safeRadius);
+    context.quadraticCurveTo(x + width, y + height, x + width - safeRadius, y + height);
+    context.lineTo(x + safeRadius, y + height);
+    context.quadraticCurveTo(x, y + height, x, y + height - safeRadius);
+    context.lineTo(x, y + safeRadius);
+    context.quadraticCurveTo(x, y, x + safeRadius, y);
+    context.closePath();
   }
 
   private interpolateTemplateText(text: string): string {

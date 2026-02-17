@@ -180,6 +180,11 @@ label {
   box-shadow: none;
 }
 
+.download-button.whatsapp {
+  background: linear-gradient(90deg, #1e9e53, #27c16a, #56d68b);
+  color: #103822;
+}
+
 @media (max-width: 980px) {
   .generator-grid {
     grid-template-columns: 1fr;

@@ -98,8 +98,21 @@
     <app-meme-preview [template]="selectedTemplate" [values]="previewValues"></app-meme-preview>
 
     <div class="preview-actions">
-      <button type="button" class="download-button" (click)="downloadPreviewImage()" [disabled]="!selectedTemplate || downloading">
+      <button
+        type="button"
+        class="download-button"
+        (click)="downloadPreviewImage()"
+        [disabled]="!selectedTemplate || downloading || downloadingWhatsapp"
+      >
         {{ downloading ? 'Gerando imagem...' : 'Baixar imagem' }}
+      </button>
+      <button
+        type="button"
+        class="download-button whatsapp"
+        (click)="downloadPreviewImageForWhatsapp()"
+        [disabled]="!selectedTemplate || downloading || downloadingWhatsapp"
+      >
+        {{ downloadingWhatsapp ? 'Gerando para WhatsApp...' : 'Baixar imagem para WhatsApp' }}
       </button>
       <p *ngIf="downloadError" class="feedback error">{{ downloadError }}</p>
     </div>
